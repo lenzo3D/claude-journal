@@ -23,6 +23,7 @@ projects/<slug>/journals/*.md      one entry per session
 reference/                         material the rules depend on, copied in from other repos
 reference/sources.json             where each copy came from, and at which commit
 scripts/check-sources.py           reports copies whose original has changed since
+scripts/lint.py                    house-rule check (em dashes, secrets); run before every commit
 skill/session-journal/             the skill that writes journals (symlinked into ~/.claude/skills on Jake's Mac)
 ```
 

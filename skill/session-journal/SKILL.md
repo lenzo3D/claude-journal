@@ -27,6 +27,7 @@ claude-journal/
 ├── REJECTED.md               rules Jake turned down (don't re-propose)
 ├── reference/                material the rules depend on, copied from other repos
 ├── scripts/check-sources.py  reports reference copies whose original changed
+├── scripts/lint.py           em dash and secret check, run before every commit
 ├── skill/session-journal/    this skill
 └── projects/<slug>/
     ├── README.md             one line per journal, newest first
@@ -63,7 +64,7 @@ Reconstruct the session from the conversation, including any compaction summary.
 - For every repo you touched, run `git status` and `git log` for this session's commits so the "What changed" list is accurate (commit hashes, files, test counts).
 - Note anything outside the filesystem that changed: deploys, database migrations, emails drafted, artifacts published, settings changed.
 - Pull out every correction the user made, close to their own words. These are the most valuable part of the journal, because corrections are exactly where Claude's defaults differ from how this agency works.
-- Run `python3 scripts/check-sources.py` from the repo root. If it reports a STALE copy (for example, the Richmade site's design tokens changed), refresh it when attended and the change is clear. Otherwise list it under "Open threads".
+- Run `python3 <repo>/scripts/check-sources.py`. If it reports a STALE copy (for example, the Richmade site's design tokens changed), refresh it when attended and the change is clear. Otherwise list it under "Open threads".
 
 If the context was compacted and a detail is gone, say so in the entry. A journal that invents details teaches the future agent something false.
 
@@ -82,7 +83,7 @@ How to write it:
 
 ### 3. House rules for everything written into this repo
 
-- **No em dashes** (the U+2014 character). The agency treats them as a tell of AI writing. Use commas, colons, parentheses, or separate sentences, whichever fits that sentence. Check before you commit (step 6).
+- **No em dashes** (the U+2014 character). The agency treats them as a tell of AI writing. Use commas, colons, parentheses, or separate sentences, whichever fits that sentence. `scripts/lint.py` checks for it before you commit (step 6).
 - **No secrets.** Leave out API keys, tokens, passwords, connection strings, bank or card details, and the contents of `.env` files. Refer to them by name ("the staging `TOKEN_ENCRYPTION_KEY`"). The repo is private, but it gets pushed to GitHub and will be read by agents.
 - **Keep client people to their roles.** Use names and roles where they help ("Kerr Sun, the 9 Solar founder, closed at S$9,999"). Leave out personal phone numbers, emails and addresses.
 
@@ -123,12 +124,13 @@ Add a line at the top of the list in `projects/<slug>/README.md` (create the fil
 ### 6. Commit and push
 
 ```bash
-cd <repo root>
-grep -rn "$(printf '\342\200\224')" --exclude-dir=.git --exclude-dir=fonts .   # finds em dashes; must print nothing
-git add -A
-git commit -m "journal: <slug> <YYYY-MM-DD> <topic>"
-git push
+python3 <repo>/scripts/lint.py          # em dashes and secret-looking strings; must say "clean"
+git -C <repo> add -A
+git -C <repo> commit -m "journal: <slug> <YYYY-MM-DD> <topic>"
+git -C <repo> push
 ```
+
+Run these as separate commands, not joined with `cd ... &&` or `$(...)`. Unattended runs only get pre-approved simple commands, and a compound command gets blocked. If lint fails, fix the file and run it again. Never commit past a failure.
 
 Commit with the repo's existing git identity (the lenzo3D noreply address), and follow the session's commit attribution instructions for the trailer. If the repo has no remote, skip the push and say so. If the push fails (no network, expired credentials), leave the commit in place and tell the user. Don't retry in a loop.
 

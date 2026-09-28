@@ -48,7 +48,7 @@ What went badly or is still weak, including my own mistakes, and what I'd do dif
 - Next steps, blockers, and anything only a human can do (accounts, payments, approvals).
 
 ## Candidate playbook rules
-- **Rule as an instruction.** Why it matters. (adopted | not adopted | pending, P-2026-09-28-01)
+- **Rule as an instruction.** Why it matters. (adopted | not adopted, P-2026-09-28-01 | pending, P-2026-09-28-01)
 ```
 
 ## Example of the level of detail wanted

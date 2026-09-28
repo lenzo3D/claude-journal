@@ -6,6 +6,8 @@ Format for each rule:
 
 - **Rule, written as an instruction.** Why it matters. _(source: [project/date](projects/slug/journals/file.md))_
 
+A rule with several sources lists them all: `_(source: [richmade/2026-09-28](...), [richpilot/2026-10-02](...))_`.
+
 Rules marked "seeded" were adopted on 28 Sep 2026 from lessons already recorded in Claude's memory notes on Jake's Mac, before the journal existed. The note named is a historical label only. Each seeded rule carries its full reason and incident, so you never need the note itself to follow it.
 
 Everything a rule depends on lives in this repo. Reference material copied from other repos is in `reference/`, and `python3 scripts/check-sources.py` reports when an original has changed since it was copied.

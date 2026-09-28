@@ -9,10 +9,12 @@ Entry format (newest at the bottom):
 ```
 ### P-YYYY-MM-DD-NN · Short title
 - **Rule:** the proposed instruction
-- **Rejected:** YYYY-MM-DD, with Jake's reason if he gave one
+- **Why:** the reason it was proposed
+- **Section:** the PLAYBOOK.md section it would have gone in
 - **Evidence:** the journal links from the pending entry
+- **Rejected:** YYYY-MM-DD. Jake's reason in his own words, naming any playbook rule it refers to
 ```
 
 ## Rejected
 
-_None yet._
+_None._

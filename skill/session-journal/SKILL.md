@@ -77,7 +77,7 @@ How to write it:
 - **Specific over general.** Name the files, commands, numbers and decisions. "Ran `npm run lint` myself and caught a broken link neither subagent saw" is reusable. "Was thorough with testing" isn't.
 - **Write the workflow as steps.** The "What I did" section is the raw material for SOPs. Record the real order, including dead ends and why you left them.
 - **Scale it to the session.** A 20-minute fix might need 250 words. A day-long build might need 1,000. Leave out filler sections rather than padding them. `projects/richmade/journals/2026-09-28-session-journal-skill.md` is the entry Jake approved as the right tone and depth.
-- **Use absolute dates** (28 Sep 2026, not "today").
+- **Use absolute dates** (28 Sep 2026, not "today"). In IDs, file names, index lines and the PENDING/REJECTED files, use `YYYY-MM-DD`.
 - **Unattended runs:** say so in the frontmatter (`run: unattended`), and state plainly any decision you made that Jake would normally have made.
 
 ### 3. House rules for everything written into this repo
@@ -104,7 +104,7 @@ List the candidates in the journal's last section. What happens next depends on 
 **Attended:** ask Jake which to adopt, using AskUserQuestion with `multiSelect: true`. Put the full rule text in the option description so he can judge it without scrolling. Also offer a "Decide later" option.
 
 - **Approved:** append the rule to the right section of `PLAYBOOK.md` in the format that file shows, with a source link to the journal. Mark it `(adopted)` in the journal.
-- **Rejected:** mark it `(not adopted)` in the journal and add an entry to `REJECTED.md` (with his reason, if he gave one).
+- **Rejected:** give it an ID (`P-YYYY-MM-DD-NN`), add it to `REJECTED.md` in that file's format (with his reason, if he gave one), and mark it `(not adopted, P-...)` in the journal.
 - **Reworded:** use his wording.
 - **Decide later**, or no answer: treat it as unattended (below).
 
@@ -130,7 +130,7 @@ git commit -m "journal: <slug> <YYYY-MM-DD> <topic>"
 git push
 ```
 
-Follow the session's commit attribution instructions for the trailer. If the push fails (no network, remote not set up yet), leave the commit in place and tell the user. Don't retry in a loop.
+Commit with the repo's existing git identity (the lenzo3D noreply address), and follow the session's commit attribution instructions for the trailer. If the repo has no remote, skip the push and say so. If the push fails (no network, expired credentials), leave the commit in place and tell the user. Don't retry in a loop.
 
 ### 7. Report back
 
@@ -140,13 +140,21 @@ Give the user the entry itself, not a relative link. The app resolves relative l
 
 ## Reviewing pending rules
 
-When Jake says "review pending rules" (or similar), or accepts the offer in step 7:
+When Jake says "review pending rules" (or similar), or accepts the offer in step 7.
+
+Every decision must come from Jake in this session. An unattended run never clears the queue, however obvious a rule looks.
 
 1. Read `PENDING.md`. If it's empty, say so and stop.
 2. Present the entries with AskUserQuestion, `multiSelect: true`, at most 4 per question. Put the rule, its reason and its evidence count in each option's description. List the entries with the most evidence first.
-3. **Adopted:** append the rule to the right section of `PLAYBOOK.md`, citing every journal in its evidence list. **Rejected:** move the entry to `REJECTED.md` with today's date and his reason. **Reworded:** adopt his wording. **Not chosen and not rejected:** ask whether to reject it or keep it pending. Don't guess.
-4. Remove decided entries from `PENDING.md` (put back "_None._" if it's empty). In each source journal, change `(pending, P-...)` to `(adopted)` or `(not adopted)`.
-5. Commit (`playbook: review pending rules YYYY-MM-DD`) and push, as in step 6.
+3. Apply each decision:
+   - **Adopted:** append the rule to the right section of `PLAYBOOK.md`. Cite every journal in its evidence list: `_(source: [richmade/2026-09-28](...), [richpilot/2026-10-02](...))_`.
+   - **Rejected:** move the entry's Rule, Why, Section and Evidence lines to the bottom of `REJECTED.md` (drop **Proposed by**) and add a **Rejected:** line with the date and Jake's reason, quoted in his own words. If his reason refers to a playbook rule, name that rule after the quote. If it isn't clear which rule he means, ask him. The full entry matters, because a later agent needs the Why to judge whether new evidence is really new.
+   - **Reworded:** adopt his wording.
+   - **Not chosen and not rejected:** ask whether to reject it or keep it pending. Don't guess.
+4. Remove decided entries from `PENDING.md`. In each source journal, change `(pending, P-...)` to `(adopted, P-...)` or `(not adopted, P-...)`, keeping the ID so the trail from journal to decision survives. Leave project index lines alone; they're a historical record.
+5. Keep the placeholders consistent: both files show `_None._` when their list is empty. Remove it when adding the first entry, and put it back when removing the last.
+6. Commit (`playbook: review pending rules YYYY-MM-DD`) and push, as in step 6.
+7. Tell Jake in a few lines what was adopted, what was rejected, and what is still pending.
 
 ## Other requests
 

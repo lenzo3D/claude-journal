@@ -37,6 +37,12 @@ skill/session-journal/             the skill that writes journals (symlinked int
 3. If he isn't (an overnight run, or he said "decide later"), they go to `PENDING.md`. When several sessions propose the same rule, it collects more evidence links instead of being duplicated.
 4. Jake says "review pending rules" in any session. Adopted rules move to `PLAYBOOK.md`, rejected ones to `REJECTED.md`.
 
+## Setting up a machine to run as Richmade's agent
+
+1. Clone this repo and symlink `skill/session-journal` into `~/.claude/skills/session-journal`.
+2. Put the contents of `reference/setup/global-CLAUDE.md` into that machine's `~/.claude/CLAUDE.md`. Without it, everyday moments (commits, preferences, SOPs, CLAUDE.md edits, weekly wraps) are only logged some of the time, because a skill description alone can't reliably trigger after another task.
+3. Allow at least `Bash(git:*)` and `Bash(python3:*)` for scheduled runs. The skill's commands are written to need nothing more.
+
 ## House rules
 
 - No em dashes anywhere in this repo.

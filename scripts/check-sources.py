@@ -2,7 +2,8 @@
 """Report copies in reference/ whose origin has changed since they were synced.
 
 Reads reference/sources.json. For each entry, asks the origin repo for the latest
-commit touching origin_paths and compares it with synced_at_commit. Exit code 1 if
+commit touching origin_paths and compares it with synced_at_commit. Entries with
+"compare": "content" (origins that aren't git repos) are compared byte for byte. Exit code 1 if
 anything is stale, 0 otherwise. When an origin repo isn't on this machine (for
 example a cloud agent that only has this repo), the entry is skipped, not failed.
 """
@@ -30,6 +31,19 @@ def main():
         repo = os.path.expanduser(e["origin_repo"])
         if not os.path.isdir(repo):
             print(f"SKIP   {e['copy']}: origin {e['origin_repo']} not on this machine")
+            continue
+        if e.get("compare") == "content":
+            # Origin isn't a git repo: compare the single file byte for byte.
+            origin = os.path.join(repo, e["origin_paths"][0])
+            copy = os.path.join(ROOT, e["copy"])
+            if not os.path.isfile(origin):
+                print(f"SKIP   {e['copy']}: {origin} not on this machine")
+            elif open(origin, "rb").read() == open(copy, "rb").read():
+                print(f"OK     {e['copy']} (matches {e['origin_repo']}/{e['origin_paths'][0]})")
+            else:
+                stale += 1
+                print(f"STALE  {e['copy']}: differs from {e['origin_repo']}/{e['origin_paths'][0]}")
+                print(f"       refresh: {e['how_to_refresh']}")
             continue
         head = latest_commit(repo, e["origin_paths"])
         if head is None:

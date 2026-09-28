@@ -2,7 +2,10 @@
   {
     "copy": "reference/richmade-design-system.md",
     "origin_repo": "~/Documents/AI Agency/site",
-    "origin_paths": ["css/styles.css", "DESIGN_BRIEF.md"],
+    "origin_paths": [
+      "css/styles.css",
+      "DESIGN_BRIEF.md"
+    ],
     "synced_at_commit": "908e5f7",
     "synced_on": "2026-09-28",
     "how_to_refresh": "Re-read the changed origin files and update the tables and rules by hand. The copy is adapted for documents and decks, not verbatim."
@@ -10,9 +13,21 @@
   {
     "copy": "reference/fonts/",
     "origin_repo": "~/Documents/AI Agency/site",
-    "origin_paths": ["assets/fonts"],
+    "origin_paths": [
+      "assets/fonts"
+    ],
     "synced_at_commit": "d04cef7",
     "synced_on": "2026-09-28",
     "how_to_refresh": "Copy assets/fonts/*.woff2 over reference/fonts/."
+  },
+  {
+    "copy": "reference/setup/global-CLAUDE.md",
+    "origin_repo": "~/.claude",
+    "origin_paths": [
+      "CLAUDE.md"
+    ],
+    "synced_on": "2026-09-28",
+    "how_to_refresh": "Copy ~/.claude/CLAUDE.md over this file when the Richmade section changes.",
+    "compare": "content"
   }
 ]

@@ -5,7 +5,7 @@ topic: Building the session-journal skill and seeding the playbook
 outcome: shipped
 satisfaction: 4/5
 model: Claude Opus 5.5
-related: [9solar-platform, 9solar-news, wa-automation-agent, leisure-frontier]
+related: [9solar-platform, 9solar-news, richpilot, leisure-frontier]
 ---
 
 # Building the session-journal skill and seeding the playbook
@@ -30,7 +30,7 @@ Jake asked how to create a Claude skill, then described the one he wanted: at th
 - Claude memory: `design-direction-no-claude-aesthetic.md` edited, `claude-journal-system.md` added, `MEMORY.md` index updated.
 
 ## Corrections and feedback from the user
-- "4 ongoing projects, not 2": 9 Solar Platform, 9 Solar News, WA Automation Agent, Leisure Frontier.
+- "4 ongoing projects, not 2": 9 Solar Platform, 9 Solar News, Richpilot (then called WA Automation Agent), Leisure Frontier.
 - The design rule I proposed said the Richmade look applies to "Richmade and client work unless told otherwise". Jake narrowed it: the Richmade design system is only for Richmade-branded non-legal documents, PDFs and slide decks, and not for client websites or client content. I had copied that scope from a 70-day-old memory note without questioning it.
 - He chose a private GitHub repo over my local-folder recommendation. My guess is that he wants the knowledge reachable by a cloud agent later, which is a better reason than any I gave for local.
 

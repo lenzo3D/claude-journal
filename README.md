@@ -20,7 +20,10 @@ PENDING.md                         proposed rules waiting for Jake (not in force
 REJECTED.md                        rules Jake turned down (don't re-propose)
 projects/<slug>/README.md          index of journals, newest first
 projects/<slug>/journals/*.md      one entry per session
+projects/<slug>/checkpoints/*.md   one line per commit-and-push, per day (read at wrap-up)
 reference/                         material the rules depend on, copied in from other repos
+reference/sops/                    SOP and process documents written in sessions
+reference/repo-docs/               copies of project repos' CLAUDE.md files
 reference/sources.json             where each copy came from, and at which commit
 scripts/check-sources.py           reports copies whose original has changed since
 scripts/lint.py                    house-rule check (em dashes, secrets); run before every commit

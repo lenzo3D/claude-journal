@@ -1,6 +1,6 @@
 ---
 name: session-journal
-description: Write an end-of-session journal entry reflecting on the whole session (what the user asked, the workflow Claude followed, what changed, the user's corrections, Claude's candid opinion, what went well and badly), save it to the claude-journal repo under the right project, then propose new playbook (SOP) rules, which the user approves on the spot or which wait in a pending queue when nobody is around. Use this whenever the user says "wrap up", "journal this", "log this session", "end of session", "write the journal", "/session-journal", "reflect on this session", or signals they are done and want the work documented, even if they never say the word "journal". Also use when an unattended or overnight run finishes its work, and when the user asks to "review pending rules" or to review, update, or add to the playbook or SOP built from past sessions.
+description: Keeps Richmade's knowledge base in the claude-journal repo. Writes end-of-session journal entries (what was asked, the workflow, what changed, the user's corrections, Claude's candid opinion) and proposes playbook (SOP) rules for approval, or queues them when nobody is around. Use whenever the user says "wrap up", "journal this", "log this session", "end of session", "/session-journal", or signals they are done and want the session documented, even without the word journal; when an unattended or overnight run finishes; and when the user asks to review pending rules or to review, update or add to the playbook or SOP. Also use, after doing the request the normal way, when the user asks to commit and push work, asks Claude to remember a preference, writes an SOP or process document, updates a repo's CLAUDE.md, or asks for a weekly wrap, so the moment gets logged. Not for articles, blog posts or client content that merely use the word journal, or for "wrap up" meaning finish a piece of writing.
 ---
 
 # Session Journal
@@ -31,6 +31,7 @@ claude-journal/
 ├── skill/session-journal/    this skill
 └── projects/<slug>/
     ├── README.md             one line per journal, newest first
+    ├── checkpoints/YYYY-MM-DD.md  commit-and-push log for the day
     └── journals/YYYY-MM-DD-<topic>.md
 ```
 
@@ -59,7 +60,7 @@ When unattended, never edit `PLAYBOOK.md`. Every proposed rule goes to `PENDING.
 
 ### 1. Gather the facts before writing
 
-Reconstruct the session from the conversation, including any compaction summary. Then check the facts instead of relying on recall:
+Reconstruct the session from the conversation, including any compaction summary, and from today's `projects/<slug>/checkpoints/YYYY-MM-DD.md` if it exists. Then check the facts instead of relying on recall:
 
 - For every repo you touched, run `git status` and `git log` for this session's commits so the "What changed" list is accurate (commit hashes, files, test counts).
 - Note anything outside the filesystem that changed: deploys, database migrations, emails drafted, artifacts published, settings changed.
@@ -157,6 +158,25 @@ Every decision must come from Jake in this session. An unattended run never clea
 5. Keep the placeholders consistent: both files show `_None._` when their list is empty. Remove it when adding the first entry, and put it back when removing the last.
 6. Commit (`playbook: review pending rules YYYY-MM-DD`) and push, as in step 6.
 7. Tell Jake in a few lines what was adopted, what was rejected, and what is still pending.
+
+## Capturing moments: do it, then log it
+
+Some everyday requests carry knowledge the overnight agent will need, so Jake wants them captured as they happen, not only at wrap-up. For each one, **first do exactly what was asked, the normal way**, as if this skill didn't exist. Then capture it lightly, as below. No full journal and no rules question unless Jake asks for one. Afterwards, add one line to your reply saying what was logged and where.
+
+| Request | Do | Then log |
+|---|---|---|
+| Commit and push (in a project repo) | Commit and push as asked | Append a line to `projects/<slug>/checkpoints/YYYY-MM-DD.md`: time, repo, commit hash, one sentence on what the commit does and why. Create the file if needed. |
+| "Remember that I prefer..." | Save it to Claude's memory as usual | If it would hold on other projects too, add it to `PENDING.md` as a proposed rule (**Proposed by:** Jake's stated preference) so it can reach the playbook. Skip it if the playbook already covers it. |
+| Write an SOP or process document | Write it where Jake wants it | Save a copy to `reference/sops/<short-name>.md`. If the original lives in another repo, register it in `reference/sources.json` so `check-sources.py` flags drift. |
+| Update a repo's CLAUDE.md | Make the edit in that repo | Copy the updated file to `reference/repo-docs/<repo>-CLAUDE.md` and register it in `reference/sources.json`. |
+| Weekly wrap (sales pipeline or similar) | Produce the wrap (use a dedicated skill such as `sales:weekly-wrap` if one fits) | File it as `projects/richmade/journals/YYYY-MM-DD-weekly-wrap.md`, with frontmatter and the wrap itself. Add "## My take" only if there's a real observation, and list it in the project index. |
+
+Rules for all of these:
+
+- Never let logging get in the way of the task. If the capture fails (say the push is rejected), the task still counts as done, and you say the log didn't save.
+- Don't log commits made to the claude-journal repo itself. That would loop.
+- Same house rules as journals: run `scripts/lint.py`, then commit to claude-journal (`log: <what>`) and push.
+- At wrap-up, step 1 reads the day's checkpoint file first. It's the most reliable record of what changed, even if the conversation was compacted.
 
 ## Other requests
 

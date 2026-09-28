@@ -6,7 +6,11 @@ Format for each rule:
 
 - **Rule, written as an instruction.** Why it matters. _(source: [project/date](projects/slug/journals/file.md))_
 
-Rules marked "seeded" were adopted on 28 Sep 2026 from lessons already recorded in Claude's memory notes, before the journal existed. The memory note named is the original record.
+Rules marked "seeded" were adopted on 28 Sep 2026 from lessons already recorded in Claude's memory notes on Jake's Mac, before the journal existed. The note named is a historical label only. Each seeded rule carries its full reason and incident, so you never need the note itself to follow it.
+
+Everything a rule depends on lives in this repo. Reference material copied from other repos is in `reference/`, and `python3 scripts/check-sources.py` reports when an original has changed since it was copied.
+
+Rules proposed but not yet approved are in `PENDING.md`. They are **not** in force. Rules Jake turned down are in `REJECTED.md`.
 
 ## Writing and copy
 
@@ -16,7 +20,7 @@ Rules marked "seeded" were adopted on 28 Sep 2026 from lessons already recorded 
 
 ## Design
 
-- **Use the Richmade design system only for Richmade-branded material:** non-legal documents, PDFs and slide decks that carry Richmade branding. It does not apply to client websites or client content, which follow each client's own brief. The system is in `AI Agency/site/DESIGN_BRIEF.md` section 3 and `AI Agency/site/design-system/`: white canvas `#FFFFFF`, ink `#0B0C0E`, one electric-blue accent `#0E63F4` used only for key emphasis, Schibsted Grotesk headings with Instrument Sans body, and generous whitespace. Never use cream/terracotta/serif combinations or AI-default fonts (Inter, Space Grotesk) for Richmade material, because that look reads as Claude's own style. _(seeded, memory: `design-direction-no-claude-aesthetic`; scope set by Jake 28 Sep 2026)_
+- **Use the Richmade design system only for Richmade-branded material:** non-legal documents, PDFs and slide decks that carry Richmade branding. It does not apply to client websites or client content, which follow each client's own brief. The full system (colours, type, layout, voice, kill list) is in `reference/richmade-design-system.md`, with the font files in `reference/fonts/`. In short: white canvas `#FFFFFF`, ink `#0B0C0E`, one electric-blue accent `#0E63F4` used only for key emphasis, Schibsted Grotesk headings with Instrument Sans body, and generous whitespace. Never use cream/terracotta/serif combinations or AI-default fonts (Inter, Space Grotesk) for Richmade material, because that look reads as Claude's own style. _(seeded, memory: `design-direction-no-claude-aesthetic`; scope set by Jake 28 Sep 2026)_
 
 ## Engineering and verification
 

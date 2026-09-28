@@ -40,6 +40,8 @@ Rules marked "seeded" were adopted on 28 Sep 2026 from lessons already recorded 
 
 - **For multi-step builds, write a spec, then a plan, then do one task per session.** Keep a progress ledger, and treat it and `git log` as the source of truth for where the plan stands. Work Jake has parked stays parked until he raises it again. This kept the 15-task WA platform build on track across many sessions. _(seeded, memory: `wa-automation-agent`, `9solar-shorts-feed-direction`)_
 - **Record human-only work in a TODO or runbook file with exact steps:** account creation, payments, domains and DNS, credentials, and client approvals. Don't work around them. An agent can't and shouldn't do them, and hidden blockers stall launches. _(seeded, memory: `leisure-frontier-enquiry-blocker`, `aura-9solar-news-site`)_
+- **Before turning an older note or past decision into a standing rule, confirm its scope with Jake.** Scope is what drifts: the July 2026 design note said "Richmade and client work", and by September it meant Richmade-branded documents only. _(source: [richmade/2026-09-28](projects/richmade/journals/2026-09-28-session-journal-skill.md))_
+- **Keep everything the playbook depends on inside this repo.** The overnight agent may only have claude-journal, so the source notes and design tokens it needs must be copied here rather than linked from `~/.claude` or other repos. _(source: [richmade/2026-09-28](projects/richmade/journals/2026-09-28-session-journal-skill.md))_
 
 ## Never do
 

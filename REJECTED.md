@@ -17,4 +17,9 @@ Entry format (newest at the bottom):
 
 ## Rejected
 
-_None._
+### P-2026-09-30-01 · Check where users work before speccing an integration
+- **Rule:** Before speccing an integration with a third-party app, establish where the client's staff will work day to day, and check whether that app can live there (embedding, iframe and plan limits).
+- **Why:** HubSpot blocks iframes, which only surfaced after a full spec and 16-task plan, and the direction was shelved.
+- **Section:** Project process
+- **Evidence:** [richpilot/2026-09-30](projects/richpilot/journals/2026-09-30-name-hubspot-pivot-crm-plan.md)
+- **Rejected:** 2026-09-30. No reason given.

@@ -36,8 +36,8 @@
     "origin_paths": [
       "docs/crm-client-switch-on.md"
     ],
-    "synced_at_commit": "af36062",
-    "synced_on": "2026-10-02",
-    "how_to_refresh": "Copy docs/crm-client-switch-on.md over this file. The original is on branch docs/crm-switch-on-sop until it is merged to main; if the README or docs/new-client-handoff.md CRM sections change, update both."
+    "synced_at_commit": "fb79901",
+    "synced_on": "2026-10-08",
+    "how_to_refresh": "Copy docs/crm-client-switch-on.md (on main since the CRM tab shipped) over this file. If the README or docs/new-client-handoff.md CRM sections change, update both."
   }
 ]

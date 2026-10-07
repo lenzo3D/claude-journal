@@ -6,12 +6,14 @@ Who does what: **you** means whoever is running the rollout (an agent with the S
 
 ## 0. One-off checks (once per environment, not per client)
 
-Only needed the first time, and already done for production on 2 Oct 2026. Re-check if something looks wrong.
+Only needed the first time. Items 1 and 2 were done for production on 2 Oct 2026; re-check if something looks wrong.
 
 1. The CRM migration `0028_crm_core.sql` is applied to the database. Check: `select to_regclass('public.contacts');` returns a name, not null.
 2. The phase 2 code is deployed. Check: `GET <app>/api/cron/crm` without a header returns 401, not 404.
-3. `CRON_SECRET` is set in Vercel (Production), and the repository secrets `CRON_SECRET` and `WA_AGENT_APP_URL` exist in GitHub.
-4. The **CRM sweep** workflow (Actions tab) runs every five minutes and prints HTTP 200. With no client on the CRM it returns empty results. A 401 means the two `CRON_SECRET` values differ; a 503 means a step failed, so read the log.
+3. The CRM tab's migration `0031_crm_tab.sql` is applied, before the tab's code (README, "Rolling out the CRM tab: migration 0031"). Check: `select count(*) from information_schema.columns where table_name = 'clients' and column_name = 'crm_lost_reasons';` returns 1.
+4. The CRM tab is deployed. Check: signed in to `/admin`, `<app>/crm` shows "Pick a client to see their CRM", not a 404.
+5. `CRON_SECRET` is set in Vercel (Production), and the repository secrets `CRON_SECRET` and `WA_AGENT_APP_URL` exist in GitHub.
+6. The **CRM sweep** workflow (Actions tab) runs every five minutes and prints HTTP 200. With no client on the CRM it returns empty results. A 401 means the two `CRON_SECRET` values differ; a 503 means a step failed, so read the log.
 
 ## 1. A new client that is not set up yet
 
@@ -23,6 +25,8 @@ Do the normal onboarding first: follow `docs/new-client-handoff.md` (profile, `n
 2. Every email address that is not a customer: the mailbox that forwards bookings into the order desk, office addresses, and the personal addresses staff send from.
 3. Whether they want their past chats, calls and orders imported (the history build), and whether they agree to the default retention: contacts with no activity for 24 months are deleted automatically (the minimum is 6 months). Agree the number before you switch on.
 4. Their country code if it is not Singapore (default 65). It decides how a local number like `9123 4567` is read.
+5. Whether the five default Lost reasons fit (Price, Went with another company, No reply, Date not available, Not a fit). Staff pick one when a deal moves to Lost, or type their own under Other.
+6. Whether they have a contact list to bring in (a spreadsheet, another CRM). There is no import screen until plan 3c, so Richmade loads it.
 
 ## 3. Step 0: the never-sync list (before anything else)
 
@@ -48,6 +52,16 @@ If the client's country code is not 65, set it now (digits only, 1 to 4, no plus
 ```sql
 update clients set default_country_code = '<code>' where slug = '<slug>';
 ```
+
+If they want different Lost reasons (at most 20; "Other" is always offered and is not in the list; changing the list does not change deals already lost):
+
+```sql
+update clients
+set crm_lost_reasons = array['Price', 'Went with another company', 'No reply', 'Date not available', 'Not a fit']
+where slug = '<slug>';
+```
+
+The never-sync list, the Lost reasons and the country code stay in SQL, done by Richmade, until the CRM settings screens ship in plan 3c.
 
 ## 4. Switch it on
 
@@ -85,10 +99,20 @@ from clients c where c.slug = '<slug>';
 
 If a staff member shows up as a contact, add them to the never-sync list and delete that contact by hand. The list only stops future records.
 
-## 6. Watch the first two sweeps
+## 6. Check the CRM tab as the client's Admin
+
+The client's Admin needs their own staff account first (`docs/new-client-handoff.md`, "Staff accounts"). Go through these with them signed in (on a call or sharing their screen), so you see exactly what their staff will. You can look first as Richmade, with the client picked in the CRM header (`/crm/deals?client=<slug>`), but that does not replace their check: only their session shows the sidebar count and proves the tab is scoped to their client.
+
+1. **CRM** is in their sidebar after Calls, and there is no Client picker in the CRM header.
+2. **Deals board:** one column per stage of their template, in order, with the deals from history (confirmed orders under Won, recent open orders under New). Deals the AI or the history build opened have no value until staff set one, so the Open pipeline card counts them as without a value.
+3. **A contact page:** open a contact you recognise. Their phone and email, their open deals and their timeline (chats, calls, orders) match what you know of them, and nobody on the never-sync list appears as a contact (search for a staff name or number).
+4. **My tasks:** Mine, Unassigned and Everyone load. Right after the history build there are usually none, which is fine; the AI's Call back tasks appear here after a handover.
+5. **Suggestions:** loads, and the count on its section tab matches the list. It is usually empty until the AI has read a few new chats.
+
+## 7. Watch the first two sweeps
 
 1. After the next two **CRM sweep** runs, confirm they are green (HTTP 200).
-2. Have a test number message the client's WhatsApp line with a real enquiry (for example a coach hire with a date and a headcount). Within seconds the chat header shows the contact and, for a genuine enquiry, a deal at the first New stage. The header refreshes about every 30 seconds.
+2. Have a test number message the client's WhatsApp line with a real enquiry (for example a coach hire with a date and a headcount). Within seconds the chat header shows the contact and, for a genuine enquiry, a deal at the first New stage, which also appears on the CRM tab's board. The header refreshes about every 30 seconds.
 3. After 30 minutes of quiet in that chat, the next sweep writes a one or two sentence summary on the contact's timeline. Check there is no price in it. The AI never writes a price or sets a deal's value.
 4. Look for stuck work:
 
@@ -112,20 +136,23 @@ If a staff member shows up as a contact, add them to the never-sync list and del
      and id in ('<burst id>', '<burst id>');
    ```
 
-## 7. What to tell the client
+## 8. What to tell the client
 
-The AI opens a deal when a new chat is a genuine enquiry, raises a Call back task when a chat is handed to a person, moves a deal to Won when an order is confirmed, and summarises each chat when it goes quiet. It only suggests a move to Quoted or Lost, field values and merging two contacts, and staff decide. It never sets a deal's value or writes a price. Its cost counts toward the same monthly cap as the replies, and over the cap the CRM's AI steps wait until the cap resets while contacts and timelines keep being recorded.
+The AI opens a deal when a new chat is a genuine enquiry, raises a Call back task when a chat is handed to a person, moves a deal to Won when an order is confirmed, and summarises each chat when it goes quiet. It only suggests a move to Quoted or Lost, field values and merging two contacts, and staff decide (merge suggestions wait, unshown, until merging ships in plan 3b). It never sets a deal's value or writes a price. Its cost counts toward the same monthly cap as the replies, and over the cap the CRM's AI steps wait until the cap resets while contacts and timelines keep being recorded.
 
-Be honest about the limits: there is no CRM tab yet, so staff see the contact and open deal in the chat header, the contact on call rows, and a line on the order card. Contacts with no activity for the retention period are deleted automatically, with their timeline, tasks and deals (chats, calls and orders stay). Deleting one person on request is done by the agency with `npm run purge -- --phone +65... --apply` (international form only; try it without `--apply` first to see what it would delete).
+Staff work it in the **CRM** tab: drag a deal to another stage (or use Move; Lost asks for the reason), add notes and tasks, complete tasks, accept or dismiss the AI's suggestions, and undo the AI's changes from the timeline. The chat header, call rows and the order card link into it.
 
-## 8. Switching it off, or a problem
+Be honest about the limits: staff cannot yet add or edit a contact, company or deal, merge two contacts, or delete anything (plan 3b), and there are no settings, import or export screens (plan 3c). Until then Richmade changes the never-sync list and the Lost reasons, and loads any contact list. Contacts with no activity for the retention period are deleted automatically, with their timeline, tasks and deals (chats, calls and orders stay). Deleting one person on request is done by the agency with `npm run purge -- --phone +65... --apply` (international form only; try it without `--apply` first to see what it would delete) until plan 3c adds it to the contact page.
 
-- **Untick CRM** on `/admin`: the AI steps, history and sweep stop for that client. Existing contacts stay and still age out under retention, even if the client is deactivated.
-- **Wrong person became a contact:** add them to the never-sync list, then delete the contact in SQL. There is no screen for it yet.
-- **Summary never appears:** run the stuck-work query in step 6.
+## 9. Switching it off, or a problem
+
+- **Untick CRM** on `/admin`: the CRM tab goes from their sidebar, and the AI steps, history and sweep stop for that client. Existing contacts stay and still age out under retention, even if the client is deactivated.
+- **Wrong person became a contact:** add them to the never-sync list, then delete the contact in SQL. There is no screen for it until plan 3c.
+- **Summary never appears:** run the stuck-work query in step 7.
+- **Accept on a suggestion fails, or a refused change takes two minutes:** migration `0031_crm_tab.sql` is not applied (step 0, item 3).
 - **Sweep red in GitHub:** open the run log. A 401 is a secret mismatch, a 503 names the failing step by code only. After a Vercel instant rollback to a build from before the CRM, disable the **CRM sweep** workflow until the CRM build is live again.
-- **Everything broke after a deploy:** the migration must be applied before the code, never after. Redeploying the previous build is safe, because the old code ignores the new tables and columns.
+- **Everything broke after a deploy:** the migrations must be applied before the code, never after. Redeploying the previous build is safe, because the old code ignores the new tables and columns.
 
 ## Known limits to remember
 
-Do not promise these away: the chat header chip refreshes about every 30 seconds; contacts built from history look recently active; a company created from an order's customer name is not removed by retention; deleting one person does not yet remove their chat burst records (the purge script does); a "will retry" alert can hide the final "abandoned" alert for a chat summary, so check the table rather than the alert.
+Do not promise these away: the chat header chip refreshes about every 30 seconds; the board's Won and Lost columns show the last 30 days only (the list view shows every deal); contacts built from history look recently active; a company created from an order's customer name is not removed by retention; deleting one person does not yet remove their chat burst records (the purge script does); a "will retry" alert can hide the final "abandoned" alert for a chat summary, so check the table rather than the alert.

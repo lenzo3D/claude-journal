@@ -19,9 +19,4 @@ Entry format (newest at the bottom):
 
 ## Waiting for review
 
-### P-2026-10-08-01 · Stop on a permission denial
-- **Rule:** When a permission check denies a step, stop and put the decision to Jake; never retry it through another tool or another agent.
-- **Why:** Four denials across Richpilot 3c1 and 3c2 (a browser step, a SQL restore, a record write, a staging sign-in) were each stopped and surfaced, and one answer from Jake unblocked the rest of the 3c2 run without anyone working around the check.
-- **Section:** Never do
-- **Proposed by:** session, decision deferred (not chosen when the other two were adopted)
-- **Evidence:** [richpilot/2026-10-08](projects/richpilot/journals/2026-10-08-crm-3c2-import-export-delete-and-production.md), [richpilot/2026-10-08 (3c1)](projects/richpilot/journals/2026-10-08-crm-3c1-settings-build-and-production-migration.md)
+_None._

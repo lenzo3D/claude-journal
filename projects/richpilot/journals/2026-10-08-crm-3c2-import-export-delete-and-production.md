@@ -76,6 +76,14 @@ The production apply went through the connector with no hang, unlike 3b. Splitti
 - Deferred minors in the ledger, none blocking: Task 4 M3 (import ids are a global key), Task 5 N1 (a busy retry outlives leaving the page), Task 6 test pins, Task 3 own-number format follow-up (fails in the safe direction).
 - The scratchpad still holds five empty misnamed SQL chunk files (`prod0034/b 87 152.sql` and similar); a guarded `rm` was blocked by the safety check, so they are left for Jake.
 
+## Addendum, same evening: tidy-up and migration 0035
+
+After the journal, Jake asked for four things. The pending rule was rejected. The onboarding docs gained the never-sync gate (fill and read back the list before ticking CRM) and the client logo step, which had sat on an unmerged branch since 3 Oct (main b85f1d2 and 9ede803). Seven merged worktrees and 19 merged branches were removed after copying their git-ignored ledgers into the main checkout. And he chose to build the 0035 follow-up in this session rather than queue it.
+
+0035 adds `crm_person_scope`, one SQL selection of a person's chats and calls, and makes both the export and `crm_delete_person` use it. The proof that mattered was a rolled-back comparison against the OLD function built from 0034's text; the implementer's first version renamed the live function instead, which would have compared new against new once 0035 was applied and always printed a match. The review also caught that deleting calls by id dropped the old predicate's re-check, so a call linked to another contact in the window could have been deleted; I ruled the guard back in. One residual difference (a call committed within milliseconds of a delete) was accepted with its cost written down. Applied to production after Jake's yes, merged and pushed (main 3e90062).
+
+One slip of mine: I pushed the onboarding docs before running the test suite, and a test reads that file. It passed when run straight after, but the order was wrong.
+
 ## Candidate playbook rules
 
 - **When a screen shows a list or count before a destructive action, send what was shown with the request, and have the server refuse with a worded conflict if its fresh view differs.** On Richpilot's delete one person, the dialog sends the companies and identities it showed; without it, an email added after the dialog opened would have gone onto the never-sync list unseen, and a company someone linked meanwhile could have been deleted. (adopted)

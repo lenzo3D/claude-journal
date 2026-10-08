@@ -4,6 +4,8 @@ Richmade's automation platform (formerly WA Automation Agent): WhatsApp agent, o
 
 ## Journals
 
+- 2026-10-08 · [CRM 3c part 2: import, export, export and delete one person](journals/2026-10-08-crm-3c2-import-export-delete-and-production.md) · shipped · 9-task subagent build, 1148 tests, migration 0034 applied to production by the agent, main 78b62be merged and pushed by the agent on Jake's instruction
+
 - 2026-10-08 · [CRM 3c part 1: Settings](journals/2026-10-08-crm-3c1-settings-build-and-production-migration.md) · partial · 8-task subagent build of the Settings pages, 1024 tests, migration 0033 applied to production, live run-through passed; code awaiting Jake's merge
 - 2026-10-08 · [CRM tab spec and pre-run plans, the PostgREST 40001 hang, the order desk conflict fix](journals/2026-10-08-crm-tab-plans-and-order-conflict-fix.md) · shipped · Spec and pre-run plans for the CRM tab (3a complete, 3b to Task 4, then built and shipped by a cloud session); found that PostgREST retries 40001 for two minutes; order desk fix 0030 live in production; cleanup done.
 - 2026-10-03 · [Design system build, Opus review, rollout, plus a formatPhone fix](journals/2026-10-03-design-system-build-and-rollout.md) · shipped · 12 Sonnet tasks with no per-task review, one Opus review (1 Critical, 6 Important, all fixed), main pushed by Jake, migration 0029 live, client-session screens still unchecked

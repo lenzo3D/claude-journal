@@ -68,6 +68,8 @@ The country code stays in SQL, done by Richmade, and so does everything on this 
 
 ## 4. Switch it on
 
+Only once the never-sync list from step 3 is filled in and read back. Ticking CRM first lets the next staff or supplier message create a customer.
+
 1. Open `/admin`, find the client, tick **CRM** under Modules, save. It builds the client's pipeline from the industry template (Coach charter for a coach operator, General otherwise) and the CRM section shows **Active**.
 2. Check the template landed:
 

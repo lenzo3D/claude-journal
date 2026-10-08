@@ -36,7 +36,7 @@
     "origin_paths": [
       "docs/crm-client-switch-on.md"
     ],
-    "synced_at_commit": "78b62be",
+    "synced_at_commit": "9ede803",
     "synced_on": "2026-10-08",
     "how_to_refresh": "Copy docs/crm-client-switch-on.md (on main since the CRM tab shipped) over this file. If the README or docs/new-client-handoff.md CRM sections change, update both."
   }

@@ -4,6 +4,7 @@ Richmade's automation platform (formerly WA Automation Agent): WhatsApp agent, o
 
 ## Journals
 
+- 2026-10-13 · [Lead Engine go-live, worker install and first real run](journals/2026-10-13-lead-engine-go-live-and-first-run.md) · shipped · L1 to L6 on production (migrations 0036 to 0043), scheduler fixed after GitHub cron proved unreliable, Mac worker installed, first run found 79 leads at about $0
 - 2026-10-08 · [CRM 3c part 2: import, export, export and delete one person](journals/2026-10-08-crm-3c2-import-export-delete-and-production.md) · shipped · 9-task subagent build, 1148 tests, migration 0034 applied to production by the agent, main 78b62be merged and pushed by the agent on Jake's instruction
 
 - 2026-10-08 · [CRM 3c part 1: Settings](journals/2026-10-08-crm-3c1-settings-build-and-production-migration.md) · partial · 8-task subagent build of the Settings pages, 1024 tests, migration 0033 applied to production, live run-through passed; code awaiting Jake's merge

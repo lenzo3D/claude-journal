@@ -33,6 +33,16 @@ Jake asked whether to clear CNA, BBC, Guardian, Al Jazeera and Bernama to raise 
 | Al Jazeera | (7 Oct reading) | Bans non-personal use, scraping, bots and text or data mining |
 | Bernama | (7 Oct reading) | Reproduction and commercial use need written permission |
 
-Open question for Jake: BBC, Guardian, Al Jazeera and Mediacorp terms also restrict automated reading and computer analysis, which arguably covers feeding their RSS headlines to the Scout even as signal. Disabling those feeds costs little (signal never makes a story citable).
+Decided by Jake, 15 Oct 2026: keep these feeds enabled as signal. (Raised: BBC, Guardian, Al Jazeera and Mediacorp terms also restrict automated reading and computer analysis, which arguably covers feeding their RSS headlines to the Scout even as signal. Disabling those feeds would cost little.)
 
 Routes to more volume that respect terms: UN News (credit plus advising the UN), more data.gov.sg datasets, and openly licensed publishers (to be checked: The Conversation, Mongabay, Global Voices), or written permission from a publisher.
+
+## Open-licence publishers, checked 15 Oct 2026 (Claude, pages read directly; not yet in the newsroom)
+
+| Publisher | Licence | What it allows | Feed volume | Recommended role |
+|---|---|---|---|---|
+| Global Voices | CC BY (attribution only) | Any use including commercial and adaptation, with credit, a link to the licence, and a note of changes. Asks to be told of republication | about 2 a day | evidence-excerpt (licence would allow full, but keep the two-publisher rule for secondary news) |
+| The Conversation | CC BY-ND | Republish unchanged with author and institution credit plus link; explicitly allows quoting authors with a link, and running the first few paragraphs with "Read the full article" link. No systematic republishing of all articles | global feed about 1 a day | evidence-excerpt |
+| Mongabay | CC BY-ND 4.0 | Republish unchanged with author credit and link to the specific article; ads fine, no paywall, no translation without permission | about 15 a day, strong South-east Asia environment coverage | evidence-excerpt; do not translate Mongabay quotes into Malay verbatim |
+
+Pages: theconversation.com/republishing-guidelines; news.mongabay.com/copyright/creative-commons/; globalvoices.org/about/global-voices-attribution-policy/.

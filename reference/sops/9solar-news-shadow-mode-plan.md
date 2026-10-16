@@ -97,3 +97,54 @@ High-risk stories are never published automatically: courts, crime, Singapore po
 | Build a Cloudflare API-token provisioning script with a 1Password secrets loader | Cuts the next client's setup from about 8 hours to under 1 |
 | Commercial roadmap and pricing conversation with Mr Saat (phases, retainer tiers, revenue share) | See the roadmap and pricing notes |
 | Source real Singapore freelancer rates (video, journalism, podcast) before quoting any phase | Production lines must be priced at 2.5x cost or more |
+
+---
+
+## 6. Later: two messages, ready to send (added 16 Oct 2026)
+
+Not urgent. Nothing is public until `live-low` (29 Oct at the earliest), so send both before launch day, not now.
+
+| # | Task | When |
+|---|---|---|
+| 6.1 | Send Mr Saat the risk message below and get his yes **in writing** (a WhatsApp reply counts). Then set `attributedNews` to `public` at `/ops/settings`. | Before launch day |
+| 6.2 | Email UN News the notice below. Then record UN News's terms note at `/ops/sources` (role `evidence-full`). | Any time before launch; it adds 2 to 4 stories a day as soon as it's done |
+
+**6.1 To Mr Saat (WhatsApp or email)**
+
+> Hi Mr Saat, one decision before launch. To publish a full paper every day, the newsroom reports facts from outlets like CNA, The Straits Times and Bernama, written in its own words with credit and a link (for example "according to CNA"). It never copies their text. Their website terms say no reuse without permission, so there is a small risk of a letter to the publisher. Are you OK for us to go ahead on that basis? If you'd rather check with a media lawyer first, we can do that too.
+
+**6.2 To UN News (email to the address on news.un.org's contact page)**
+
+> Subject: Notice of use of UN News material
+>
+> Hello UN News team, as your copyright page asks, this is to let you know that [site name] ([site URL]), a Singapore news site, will report on UN News articles with credit to UN News and a link to each original story. Thank you for making your reporting available. [Your name], [Richmade, on behalf of the publisher]
+
+Fill in the site name and URL once the name and domain are decided (3.2 and 3.7).
+
+---
+
+## 7. Questions for Mr Saat (one meeting, about 30 minutes)
+
+**Must answer before launch**
+1. **Publisher of record:** whose name, company and UEN go on the site as publisher? Who carries legal responsibility for what it publishes?
+2. **Risk on outlet-based stories:** is he OK publishing stories built from CNA, Straits Times and Bernama reporting, in our words with credit? (See 6.1.)
+3. **Name and design:** which of the 3 designs and which name? (Then the switcher comes off.)
+4. **Domain:** which domain, and who buys and owns it?
+5. **Contact email** for readers, corrections and legal notices, and who reads it.
+6. **Launch date** he has in mind, and whether a quiet soft launch first is fine.
+7. **POFMA and complaints:** if a government direction or a complaint arrives, who is the first person to call, and how fast does he expect a takedown?
+
+**Shapes the product**
+8. **Volume:** how many stories a day does he expect? (Today's realistic range is 20 to 30, rising with more sources.)
+9. **Sections:** which sections matter most to him: Singapore, region, business, sustainability, lifestyle?
+10. **Topics to avoid,** beyond the built-in ones (courts, crime, politics, race, religion, health claims, minors, 9 Solar and its competitors).
+11. **9 Solar mentions:** confirm the site never promotes 9 Solar, even indirectly.
+12. **Malay:** can he suggest a fluent reviewer to check the Malay versions once?
+13. **Wire or syndication licence:** does he have contacts at Asia News Network, Bernama, AFP or Reuters from his SPH days? Would he budget for a licence to fill the World and Business pages?
+
+**Business and operations**
+14. **Running costs:** AI costs are about US$60 to US$100 a month on top of the retainer. Who pays if volume grows past that?
+15. **Analytics:** Google Analytics or Cloudflare Web Analytics, and does he want a monthly report?
+16. **IMDA:** he knows the online news licence applies at 50,000 Singapore visitors a month (S$50,000 bond)? Who handles it if traffic gets there?
+17. **Social media:** does he want stories posted automatically to social channels, and which ones?
+18. **Reporting:** a weekly or monthly summary from us (stories published, corrections, traffic)?

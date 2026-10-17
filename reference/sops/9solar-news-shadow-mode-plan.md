@@ -65,7 +65,7 @@ Internal. Not for the client. Written 15 Oct 2026.
 | # | Decision | With whom | Why it blocks going live |
 |---|---|---|---|
 | 3.1 | **Publisher of record**, and who carries liability for AI-written stories | Mr Saat | A legal owner must exist before anything is public |
-| 3.2 | **Design and brand name.** The site still shows the design switcher (3 designs, 2 names). Mr Saat picks one, and Claude removes the switcher. | Mr Saat | The public site can't launch with a comparison switcher |
+| 3.2 | **Design and brand name. DONE 18 Oct.** Mr Saat chose Smart Brief and the name Shine, with the line "Lighting up your world". The switcher is removed on branch `feature/shine-final` (live once that is pushed to `main`). | Mr Saat | The public site can't launch with a comparison switcher |
 | 3.3 | **A real contact email** for the site | Mr Saat | The site has no contact address. Nothing is invented. |
 | 3.4 | **IMDA check:** the licence applies at 50,000 unique Singapore visitors a month, with a S$50,000 bond | You | Needed before traffic grows |
 | 3.5 | **Malay reviewer** to check Malay stories and UI text once, including the new badge wording | A fluent speaker | The Malay check is currently a back-translation |
@@ -138,7 +138,7 @@ Fill in the site name and URL once the name and domain are decided (3.2 and 3.7)
 8. **Volume:** how many stories a day does he expect? (Today's realistic range is 20 to 30, rising with more sources.)
 9. **Sections:** which sections matter most to him: Singapore, region, business, sustainability, lifestyle?
 10. **Topics to avoid,** beyond the built-in ones (courts, crime, politics, race, religion, health claims, minors, 9 Solar and its competitors).
-11. **9 Solar mentions:** confirm the site never promotes 9 Solar, even indirectly.
+11. **9 Solar mentions and competitors:** confirm the site never promotes 9 Solar, even indirectly. Ask him to **name 9 Solar's competitors** (company names). Stories naming them wait for your decision; until he names them, no company counts as a competitor. Enter the names at `/ops/settings` in `competitorNames`, separated by commas.
 12. **Malay:** can he suggest a fluent reviewer to check the Malay versions once?
 13. **Wire or syndication licence:** does he have contacts at Asia News Network, Bernama, AFP or Reuters from his SPH days? Would he budget for a licence to fill the World and Business pages?
 

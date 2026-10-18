@@ -68,9 +68,9 @@ Internal. Not for the client. Written 15 Oct 2026.
 | 3.2 | **Design and brand name. DONE 18 Oct.** Mr Saat chose Smart Brief and the name Shine, with the line "Lighting up your world". The switcher is removed on branch `feature/shine-final` (live once that is pushed to `main`). | Mr Saat | The public site can't launch with a comparison switcher |
 | 3.3 | **A real contact email** for the site | Mr Saat | The site has no contact address. Nothing is invented. |
 | 3.4 | **IMDA check:** the licence applies at 50,000 unique Singapore visitors a month, with a S$50,000 bond | You | Needed before traffic grows |
-| 3.5 | **Malay reviewer** to check Malay stories and UI text once, including the new badge wording | A fluent speaker | The Malay check is currently a back-translation |
+| 3.5 | **Malay reviewer** to check Malay stories and UI text once, including the new badge wording. **Review passed 18 Oct** (Jake's report; the new Malay About page text written the same day may not have been in scope). | A fluent speaker | The Malay check is currently a back-translation |
 | 3.6 | **Analytics:** Google Analytics 4 or Cloudflare Web Analytics | You | The audience alert can't work without it |
-| 3.7 | **Real domain** (instead of `richmade-app.workers.dev`) | Mr Saat | When it's ready, Claude updates SITE_URL, Turnstile and Access |
+| 3.7 | **Real domain** (instead of `richmade-app.workers.dev`). Mr Saat prefers `shine.ai`, but it is for sale at US$513,498; alternatives and the trademark search are in `9solar-news-shine-trademark-and-domain-notes.md` | Mr Saat | When it's ready, Claude updates SITE_URL, Turnstile and Access |
 
 **Source coverage (unlocks more sections)**
 - **World section:** in `/ops/sources`, add the terms note for NASA. The wording is in the source-terms decisions note.
@@ -106,7 +106,7 @@ Not urgent. Nothing is public until `live-low` (29 Oct at the earliest), so send
 
 | # | Task | When |
 |---|---|---|
-| 6.1 | Send Mr Saat the risk message below and get his yes **in writing** (a WhatsApp reply counts). Then set `attributedNews` to `public` at `/ops/settings`. | Before launch day |
+| 6.1 | **Done verbally 18 Oct:** Mr Saat gave full permission on a call, and attributed news went public at 13:45 SGT. Still worth a one-line written confirmation (a WhatsApp "confirming our call: OK to publish" is enough) so it is on record. | This week |
 | 6.2 | Email UN News the notice below. Then record UN News's terms note at `/ops/sources` (role `evidence-full`). | Any time before launch; it adds 2 to 4 stories a day as soon as it's done |
 
 **6.1 To Mr Saat (WhatsApp or email)**

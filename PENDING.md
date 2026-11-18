@@ -19,4 +19,9 @@ Entry format (newest at the bottom):
 
 ## Waiting for review
 
-_None._
+### P-2026-11-18-01 · Build on Sonnet, plan and judge on Opus
+- **Rule:** When executing an approved plan, dispatch the implementer and reviewer agents on Sonnet 5.5; keep planning, rulings and the final go or no-go in the main session.
+- **Why:** cost. Jake, 18 Nov 2026: "remember if doing a build, build with sonnet 5.5".
+- **Section:** Working with subagents (or the closest section)
+- **Proposed by:** Jake's stated preference
+- **Evidence:** [9solar-news/2026-11-18](projects/9solar-news/checkpoints/2026-11-18.md)
